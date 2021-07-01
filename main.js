@@ -1,6 +1,5 @@
 import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
-import { OBJLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/OBJLoader.js'
-import { MTLLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/MTLLoader.js'
+import { Rhino3dmLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/3DMLoader.js';
 
 const scene = new THREE.Scene();
 
@@ -33,24 +32,17 @@ scene.add(mesh);
 mesh.position.set(20, 3, -20);
 
 let bbero;
-const mtlLoader = new MTLLoader();
-const objLoader = new OBJLoader();
-mtlLoader.load(
-    'bbero.mtl',
-    (mtl) => {
-        mtl.preload();
-        objLoader.setMaterials(mtl);
-        objLoader.load(
-            "bbero.obj",
-            function ( obj ) {
-                bbero = obj;
-                obj.position.set(30, 0, -30);
-                obj.traverse(function(child){child.eceiveShadow = true;});
-                scene.add( obj );
-            }
-        );
+const rhinoLoader = new Rhino3dmLoader();
+rhinoLoader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' );
+rhinoLoader.load(
+    'bbero.3dm',
+    function (obj) {
+        bbero = obj;
+        obj.position.set(30, 0, -30);
+        obj.traverse(function(child){child.eceiveShadow = true;});
+        scene.add( obj );
     }
-);
+)
 
 const geometry2 = new THREE.DodecahedronGeometry(30, 2);
 const material = new THREE.MeshStandardMaterial({
