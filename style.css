@@ -1,0 +1,53 @@
+@import url(//fonts.googleapis.com/css2?family=Tourney);
+
+body {
+  background-image: url('bg.jpeg');
+  background-size: 100%;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0,0,0,0.75);
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.d1 {
+  position: absolute;
+}
+
+.d2 {
+  position: absolute;
+  top: 80%;
+}
+
+* {
+  color: white;
+  font-family: 'Tourney', cursive;
+  font-weight: 300;
+}
+
+h1 {
+  margin-top: 2vh;
+  margin-left: 2vw;
+  font-style: italic;
+}
+
+h2 {
+  margin-left: 60vw;
+  margin-right: 2vw;
+  text-align: right;
+}
